@@ -10,6 +10,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 @app.route("/get_price/<ticker>")
+
+def search():
+
+    ticker= request.args.get("ticker")
+    financial_info= search_in_yahoo_(ticker=ticker)
+    return Response({}, status=200, mimetype='application/json')
+    
 def get_price(ticker):
 
     header = {
@@ -26,8 +33,14 @@ def get_price(ticker):
         app.logger.info(f"Yahoo has problem with ticker: {ticker}.")
         app.logger.info(f"Yahoo status code: {response.status_code}.")
         return Response({}, status=404, mimetype='application/json')
-
-
+    
+  def search_func():
+    score = financial_info["quotes"][0]["score"]
+    if score == 20521.0
+        return "success"
+    else:
+        return "failure"
+    
     return Response(json.dumps(company_info), status=200, mimetype='application/json')
 
     """
